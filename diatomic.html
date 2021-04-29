@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+    <title>Diatomic Molecule</title>
+    <link rel="stylesheet" href="https://manglekuo.com/i-v/styles.css?v=2">
+    <link rel = "icon" href = "images/favicon.ico" type="image/x-icon">
+
+    <style type="text/css">
+        input[type=range] {
+        }
+
+        .titleKE {
+            padding-left: 8px;
+            font-weight:400;
+            border-left: 8px solid #02893B;
+        }
+
+        .titleAtomA {
+            padding-left: 4px;
+            font-weight:200;
+            border-left: 4px solid #006EAF;
+        }
+
+        .titleAtomB {
+            padding-left: 4px;
+            font-weight:200;
+            border-left: 4px solid #9F004E;
+        }
+
+    </style>
+    <script src=https://cdn.plot.ly/plotly-latest.min.js></script>
+    <script src = "./scripts/potentials.js"></script>
+    <script src = "./scripts/vecops.js"></script>
+    <script src = "./scripts/diatomic.js"></script>
+</head>
+<body>
+
+<h1>Diatomic Molecule: Vibration and Rotation</h1>
+
+<div class="container">
+    <div class="twelve columns">
+        <!--Phaser animation and KE plots & input sliders-->
+        <div class="seven columns">
+            <div class="row">
+                <div id="phaser" style="padding-bottom: 7px"></div>
+            </div>
+
+            <div class="row" style="padding-bottom: 13px">
+                <div class="three columns">
+                    <button id="playPauseButton">Start</button>
+                </div>
+
+                <div class="three columns">
+                    <button id="resetButton">Reset</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <h4 class="titleKE">Kinetic Energies</h4>
+                <!-- Vib KE slider -->
+                <label class="sliderTitle">Vibrational:
+                    <span id="vibKEDisplay" data-unit="eV">0 eV</span>
+                </label>
+                <label class="slider">
+                    <input id="vibKE" class="inputs" title="Vib KE" type="range" value="0" min="0" max="10.0" step="0.05"/>
+                    <span class="sliderMin">0.00</span><span class="sliderMax">10.00</span>
+                </label>
+
+                <br>
+                <!-- Rot KE slider -->
+                <label class="sliderTitle">Rotational:
+                    <span id="rotKEDisplay" data-unit="eV">5 eV</span>
+                </label>
+                <label class="slider">
+                    <input id="rotKE" class="inputs" title="Rot KE" type="range" value=0" min="0" max="10.0" step="0.05"/>
+                    <span class="sliderMin">0.00</span><span class="sliderMax">10.00</span>
+                </label>
+            </div>
+
+            <!-- Atom A and Atom B LJ Parameter input fields -->
+            <div class="row">
+                <div class="four columns">
+                    <h5 class="titleAtomA">Atom A</h5>
+                    <span>&sigma; = </span>      <a class="txt" id="s1" data-change title="&sigma;">2</a> <span><em>nm</em></span>
+                    <br>
+                    <span>&epsilon; = </span>    <a class="txt" id="e1" data-change title="&epsilon;">10</a> <span><em>eV</em></span>
+                </div>
+
+                <div class="four columns">
+                    <h5 class="titleAtomB">Atom B</h5>
+                    <span>&sigma; = </span>    <a id="s2" class="txt" data-change title="&sigma;">2</a> <span><em>nm</em></span>
+                    <br>
+                    <span>&epsilon; = </span>  <a id="e2" class="txt" data-change title="&epsilon;">10</a> <span><em>eV</em></span>
+                </div>
+
+                <div class="four columns">
+                    <br><br>
+                    <button id="submitLJ" class="inputs">Update LJ</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="five columns">
+            <em><a for="#LJ_scatter" class="showHideButton">Hide </a></em> <a>LJ potential</a>
+            <div class="expand twelve columns">
+                <div id="LJ_scatter" style="width:100%; height: 200px"></div>
+            </div>
+            <br>
+
+            <!-- PE Graph Plotly -->
+            <em><a for="#graphPotE" class="showHideButton">Hide </a></em> <a>PE</a>
+            <div id="graphPotE" class="expand twelve columns" style="height: 220px; padding-bottom: 5px;">
+            </div>
+            <br>
+
+            <!-- Vib KE Graph Plotly -->
+            <em><a for="#graphVibE" class="showHideButton">Hide </a></em> <a>KE<sub>vib</sub></a>
+            <div id="graphVibE" class="expand twelve columns" style="height: 220px; padding-bottom: 5px;">
+            </div>
+            <br>
+
+            <!-- Rot KE Graph Plotly -->
+            <em><a for="#graphRotE" class="showHideButton">Hide </a></em> <a>KE<sub>rot</sub></a>
+            <div id="graphRotE" class="expand twelve columns" style="height: 220px; padding-bottom: 5px;">
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+<script src=https://code.jquery.com/jquery-latest.min.js></script>
+<script src = "https://github.com/photonstorm/phaser-ce/releases/download/v2.8.3/phaser.min.js"></script>
+<script src="./scripts/graphics.js"></script>
+
+</body>
+</html>
+
